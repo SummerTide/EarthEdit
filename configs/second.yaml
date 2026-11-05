@@ -1,0 +1,53 @@
+dataset: second
+pretrained_model: stabilityai/stable-diffusion-3-medium-diffusers
+
+layout_base:
+  max_train_steps: 5000
+  checkpointing_steps: 250
+  batch_size: 2
+  grad_accum: 8
+  learning_rate: 5.0e-6
+  lr_warmup_steps: 100
+  timesteps: uniform
+  text_dropout: 0.0
+  layout_dropout: 0.0
+  num_workers: 2
+  seed: 42
+
+layout_refine:
+  max_train_steps: 6000
+  checkpointing_steps: 1000
+  batch_size: 4
+  grad_accum: 4
+  learning_rate: 1.0e-5
+  lr_warmup_steps: 100
+  timesteps: logit_normal
+  text_dropout: 0.1
+  layout_dropout: 0.1
+  num_workers: 2
+  seed: 42
+
+generator:
+  max_train_steps: 20000
+  checkpointing_steps: 2000
+  batch_size: 4
+  grad_accum: 8
+  learning_rate: 1.0e-5
+  input_lr: 1.0e-4
+  lr_warmup_steps: 100
+  text_dropout: 0.1
+  layout_dropout: 0.1
+  p_blob: 0.3
+  dilation: [2, 12]
+  outside_weight: 0.05
+  num_workers: 4
+  seed: 42
+
+sampling:
+  checkpoint_step: 16000
+  cfg: 1.5
+  cfg_mode: both
+  dilate: 2
+  feather: 1
+  steps: 28
+  seed: 42
